@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz de Bauru</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .btn-voltar {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        padding: 8px 16px;
+        background: #775917;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+    }
+
+    header {
+        background-color: #775917;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 700px;
+        margin: 0 auto 20px auto;
+    }
+
+    main {
+        max-width: 700px;
+        margin: 0 auto;
+        background: white;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border-top: 4px solid #c59b27;
+    }
+
+    .pergunta {
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .pergunta h3 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+    .opcao {
+        display: block;
+        margin-bottom: 6px;
+        cursor: pointer;
+    }
+
+    .btn-enviar {
+        width: 100%;
+        padding: 12px;
+        background: #775917;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .btn-enviar:hover {
+        background: #5c4512;
+    }
+
+    /* Caixa do Gabarito */
+    #gabarito {
+        display: none;
+        margin-top: 25px;
+        padding: 20px;
+        background-color: #fef8e7;
+        border: 2px solid #c59b27;
+        border-radius: 8px;
+    }
+
+    #gabarito h2 {
+        color: #775917;
+        margin-top: 0;
+        font-size: 1.3rem;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 8px;
+    }
+
+    .item-gabarito {
+        margin-bottom: 10px;
+        font-size: 0.95rem;
+    }
+
+    .item-gabarito strong {
+        color: #2e7d32;
+    }
+
+    footer {
+        text-align: center;
+        margin-top: 30px;
+        color: #666;
+        font-size: 0.85rem;
+    }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="btn-voltar">← Voltar</a>
+
+<header>
+    <h1>Quiz: História de Bauru</h1>
+    <p>Responda às perguntas e confira o gabarito no final!</p>
+</header>
+
+<main>
+    <form id="quizForm" onsubmit="mostrarGabarito(event)">
+        
+        <div class="pergunta">
+            <h3>1. Em que ano Bauru conquistou sua emancipação política?</h3>
+            <label class="opcao"><input type="radio" name="q1" required> a) 1896</label>
+            <label class="opcao"><input type="radio" name="q1"> b) 1905</label>
+            <label class="opcao"><input type="radio" name="q1"> c) 1937</label>
+        </div>
+
+        <div class="pergunta">
+            <h3>2. Qual foi o principal motor de crescimento no início do século XX?</h3>
+            <label class="opcao"><input type="radio" name="q2" required> a) Entroncamento das ferrovias</label>
+            <label class="opcao"><input type="radio" name="q2"> b) Construção de porto marítimo</label>
+            <label class="opcao"><input type="radio" name="q2"> c) Extração de petróleo</label>
+        </div>
+
+        <div class="pergunta">
+            <h3>3. Quem criou a receita do famoso Sanduíche Bauru em 1937?</h3>
+            <label class="opcao"><input type="radio" name="q3" required> a) Pelé</label>
+            <label class="opcao"><input type="radio" name="q3"> b) Casimiro Pinto Neto</label>
+            <label class="opcao"><input type="radio" name="q3"> c) Ozires Silva</label>
+        </div>
+
+        <div class="pergunta">
+            <h3>4. Qual é o apelido carinhoso atribuído à cidade?</h3>
+            <label class="opcao"><input type="radio" name="q4" required> a) Cidade Jardim</label>
+            <label class="opcao"><input type="radio" name="q4"> b) A Cidade Sem Limites</label>
+            <label class="opcao"><input type="radio" name="q4"> c) Cidade do Sol</label>
+        </div>
+
+        <div class="pergunta">
+            <h3>5. Qual bauruense famoso tornou-se o primeiro astronauta brasileiro?</h3>
+            <label class="opcao"><input type="radio" name="q5" required> a) Marcos Pontes</label>
+            <label class="opcao"><input type="radio" name="q5"> b) Santos Dumont</label>
+            <label class="opcao"><input type="radio" name="q5"> c) Casimiro Pinto Neto</label>
+        </div>
+
+        <div class="pergunta">
+            <h3>6. Em qual time bauruense o jovem Pelé deu seus primeiros passos no futebol?</h3>
+            <label class="opcao"><input type="radio" name="q6" required> a) Bauru Atlético Clube (BAC)</label>
+            <label class="opcao"><input type="radio" name="q6"> b) Esporte Clube Noroeste</label>
+            <label class="opcao"><input type="radio" name="q6"> c) Corinthians de Bauru</label>
+        </div>
+
+        <div class="pergunta">
+            <h3>7. Qual engenheiro bauruense foi o fundador da Embraer?</h3>
+            <label class="opcao"><input type="radio" name="q7" required> a) Ozires Silva</label>
+            <label class="opcao"><input type="radio" name="q7"> b) Marcos Pontes</label>
+            <label class="opcao"><input type="radio" name="q7"> c) Casimiro Pinto Neto</label>
+        </div>
+
+        <div class="pergunta">
+            <h3>8. Qual povo indígena habitava originalmente a região de Bauru?</h3>
+            <label class="opcao"><input type="radio" name="q8" required> a) Kaingangs (Coroados)</label>
+            <label class="opcao"><input type="radio" name="q8"> b) Yanomamis</label>
+            <label class="opcao"><input type="radio" name="q8"> c) Caiapós</label>
+        </div>
+
+        <div class="pergunta">
+            <h3>9. Qual o nome da principal ferrovia histórica de Bauru?</h3>
+            <label class="opcao"><input type="radio" name="q9" required> a) Estrada de Ferro Noroeste do Brasil (NOB)</label>
+            <label class="opcao"><input type="radio" name="q9"> b) Transiberiana</label>
+            <label class="opcao"><input type="radio" name="q9"> c) Vitória a Minas</label>
+        </div>
+
+        <div class="pergunta">
+            <h3>10. Qual importante universidade pública tem campus de destaque em Bauru?</h3>
+            <label class="opcao"><input type="radio" name="q10" required> a) Universidade de São Paulo (USP)</label>
+            <label class="opcao"><input type="radio" name="q10"> b) Universidade de Brasília (UnB)</label>
+            <label class="opcao"><input type="radio" name="q10"> c) UFRJ</label>
+        </div>
+
+        <button type="submit" class="btn-enviar">Ver Gabarito</button>
+    </form>
+
+    <!-- GABARITO QUE APARECE APÓS CLICAR NO BOTÃO -->
+    <div id="gabarito">
+        <h2>Gabarito Oficial</h2>
+        <div class="item-gabarito">1. Emancipação: <strong>a) 1896</strong></div>
+        <div class="item-gabarito">2. Motor de crescimento: <strong>a) Entroncamento das ferrovias</strong></div>
+        <div class="item-gabarito">3. Criador do Bauru: <strong>b) Casimiro Pinto Neto</strong></div>
+        <div class="item-gabarito">4. Apelido: <strong>b) A Cidade Sem Limites</strong></div>
+        <div class="item-gabarito">5. Astronauta: <strong>a) Marcos Pontes</strong></div>
+        <div class="item-gabarito">6. Time de infância do Pelé: <strong>a) BAC</strong></div>
+        <div class="item-gabarito">7. Fundador da Embraer: <strong>a) Ozires Silva</strong></div>
+        <div class="item-gabarito">8. Povo originário: <strong>a) Kaingangs</strong></div>
+        <div class="item-gabarito">9. Ferrovia histórica: <strong>a) NOB</strong></div>
+        <div class="item-gabarito">10. Universidade: <strong>a) USP</strong></div>
+    </div>
+</main>
+
+<footer>
+    <p>© Memória Viva — Bauru</p>
+</footer>
+
+<script>
+function mostrarGabarito(event) {
+    event.preventDefault(); // Impede o recarregamento da página
+    document.getElementById('gabarito').style.display = 'block'; // Mostra a caixa do gabarito
+}
+</script>
+
+</body>
+</html>

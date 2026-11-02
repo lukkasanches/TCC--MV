@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linha do Tempo - Bauru</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("fundobauru.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+    padding-top: 60px;
+    color: #222;
+}
+
+h1 {
+    margin: 20px 0;
+}
+
+/* Timeline compactada */
+.timeline-wrapper {
+    max-width: 750px;
+    margin: 30px auto;
+    padding: 0 15px;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    margin: 40px auto 30px auto;
+}
+
+.linha {
+    height: 4px;
+    background: #444;
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.pontos {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+}
+
+.ponto {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+}
+
+.ponto:focus-visible {
+    outline: 2px solid #2563eb;
+    border-radius: 4px;
+}
+
+.bola {
+    width: 14px;
+    height: 14px;
+    background: #dc2626;
+    border-radius: 50%;
+    margin: 3px auto;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.ponto:hover .bola,
+.ponto.ativa .bola {
+    transform: scale(1.3);
+    background: #2563eb;
+}
+
+.ponto span {
+    display: block;
+    margin-top: 8px;
+    font-weight: bold;
+    font-size: 13px;
+    color: #111;
+}
+
+/* Card de informações */
+.info {
+    margin-top: 30px;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    min-height: 120px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    text-align: left;
+}
+
+.info.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.info h2 {
+    margin-top: 0;
+    color: #1e3a8a;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 6px;
+}
+
+.info img {
+    width: 100%;
+    max-height: 320px;
+    object-fit: cover;
+    margin-top: 15px;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.info img:hover {
+    transform: scale(1.02);
+}
+
+/* Botão Voltar */
+.btn-voltar {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    padding: 8px 14px;
+    font-size: 14px;
+    background: #1e293b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.btn-voltar:hover {
+    background: #334155;
+}
+
+/* Seção de Vídeo */
+.video-container {
+    max-width: 750px;
+    margin: 40px auto 60px auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.iframe-responsive {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.iframe-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+</style>
+
+</head>
+<body>
+
+  <button onclick="window.location.href='index.html'" class="btn-voltar" aria-label="Voltar para a página inicial">⬅ Início</button>
+
+  <header>
+    <h1>Linha do Tempo de Bauru</h1>
+  </header>
+
+  <main>
+    <section class="timeline-wrapper">
+      <div class="container">
+        <div class="linha"></div>
+        <div class="pontos">
+          <button class="ponto" onclick="mostrar(0)" aria-label="Ano 1900"><div class="bola"></div><span>1900</span></button>
+          <button class="ponto" onclick="mostrar(1)" aria-label="Ano 1920"><div class="bola"></div><span>1920</span></button>
+          <button class="ponto" onclick="mostrar(2)" aria-label="Ano 1930"><div class="bola"></div><span>1930</span></button>
+          <button class="ponto" onclick="mostrar(3)" aria-label="Ano 1940"><div class="bola"></div><span>1940</span></button>
+          <button class="ponto" onclick="mostrar(4)" aria-label="Ano 1950"><div class="bola"></div><span>1950</span></button>
+          <button class="ponto" onclick="mostrar(5)" aria-label="Ano 1970"><div class="bola"></div><span>1970</span></button>
+          <button class="ponto" onclick="mostrar(6)" aria-label="Ano 1990"><div class="bola"></div><span>1990</span></button>
+          <button class="ponto" onclick="mostrar(7)" aria-label="Ano 2020"><div class="bola"></div><span>2020</span></button>
+        </div>
+      </div>
+
+      <article class="info" id="infoBox" aria-live="polite">
+        <h2 id="ano">Selecione um ano</h2>
+        <p id="texto">Clique em um ponto acima para conferir os detalhes desse período na história de Bauru.</p>
+        <img id="imagem" alt="Imagem histórica representativa do ano selecionado" style="display:none;">
+      </article>
+    </section>
+
+    <section class="video-container">
+      <h2>Vídeo sobre a História de Bauru</h2>
+      <div class="iframe-responsive">
+        <iframe 
+          src="https://www.youtube-nocookie.com/embed/qmz4sQKVI2w?si=1yWhChbFterIjCVB"
+          title="História de Bauru"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+  </main>
+
+<script>
+const dados = [
+  { 
+    texto: "No início do século XX, Bauru deixou de ser um pequeno povoado e começou sua aceleração urbana. A chegada dos primeiros trilhos e o povoamento vindo do leste paulista e Minas Gerais impulsionaram a economia baseada no café e na ocupação das terras férteis do centro paulista.", 
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtpUQ4-9__dokNx9njTqd8Uwdj4SdiWA8mfDXKKhCShA&s=10" 
+  },
+  { 
+    texto: "A consolidação da Estrada de Ferro Noroeste do Brasil (NOB) transformou a cidade em um entroncamento ferroviário estratégico. Bauru tornou-se o ponto de convergência entre a Companhia Paulista, a Sorocabana e a NOB, recebendo um grande fluxo de migrantes e imigrantes.", 
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrgJdmgC1IIfY1razxUCUecqpRb1WqQ4uHOrcrmU8Yww&s=10" 
+  },
+  { 
+    texto: "Período de forte crescimento comercial e infraestrutura civil. A cidade expandiu sua área central, pavimentou as primeiras grandes vias e estabeleceu importantes estruturas de serviços, fortalecendo sua posição como polo regional do interior do estado.", 
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD0bhbOikCu1fM-Lsv0s2-Hsn_ukkmQNX1z0D3aOjPiISfEDXsjBdYfB8D&s=10" 
+  },
+  { 
+    texto: "Em 1937, o estudante bauruense Casimiro Pinto Neto criou a receita do famoso 'Sanduíche Bauru' no restaurante Ponto Chic em São Paulo. Durante a década de 1940, o lanche popularizou-se nacionalmente e tornou-se um símbolo do patrimônio cultural da cidade.", 
+    img: "https://s2-g1.glbimg.com/eX8jWM964iSazyAAynUQYpsDmGg=/0x0:1364x761/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/9/1/x6pyk6TviHbjSX5XvnwQ/bauru-bdsp.jpg" 
+  },
+  { 
+    texto: "Abertura da Praça Machado de Mello e consolidação do novo complexo ferroviário da NOB. A cidade passou por intenso crescimento demográfico, expandindo bairros periféricos e fortalecendo o setor industrial e de serviços.", 
+    img: "https://sampi.net.br/dir-arquivo-imagem/2026/04/4183b6a9343411068bee9db4e8b4aa75.jpg" 
+  },
+  { 
+    texto: "Início do processo de consolidação de Bauru como centro acadêmico e universitário com a expansão de faculdades como a USP Bauru e instituições privadas. A economia gradualmente migrou do transporte ferroviário para o setor de serviços, comércio e educação.", 
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWsKdSORbzDfWnN4vGgzVDjdGC-lb09NOqgUrPmhJxOQ&s=10" 
+  },
+  { 
+    texto: "Expansão urbana acelerada com a construção de rodovias modernas (como a Marechal Rondon e Eng. João Baptista Cabral Rennó), shopping centers e verticalização do centro urbano. Bauru firmou-se definitivamente como a 'Capital do Centro-Oeste Paulista'.", 
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWP8Vb0QxjKymBmk7900k5FB3QnD0_TXMVciHbDPO7bA&s=10" 
+  },
+  { 
+    texto: "Consolidação de Bauru como polo de inovação, saúde e ensino superior no interior de São Paulo. A preservação do patrimônio histórico ferroviário caminha lado a lado com a modernização urbana, tecnologia e desenvolvimento socioeconômico sustentável.", 
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFsclPQS3k9YFtzJCAKBTg1WPfVosUxAyUb5hm_3YkFg&s=10" 
+  }
+];
+
+function mostrar(index) {
+  const pontos = document.querySelectorAll(".ponto");
+  const infoBox = document.getElementById("infoBox");
+  const anoElement = document.getElementById("ano");
+  const textoElement = document.getElementById("texto");
+  const imgElement = document.getElementById("imagem");
+
+  pontos.forEach(p => p.classList.remove("ativa"));
+  if (pontos[index]) {
+    pontos[index].classList.add("ativa");
+  }
+
+  infoBox.classList.remove("mostrar");
+
+  setTimeout(() => {
+    const anoTexto = pontos[index].querySelector("span").innerText;
+    anoElement.innerText = `Ano ${anoTexto}`;
+    textoElement.innerText = dados[index].texto;
+
+    if (dados[index].img) {
+      imgElement.src = dados[index].img;
+      imgElement.style.display = "block";
+    } else {
+      imgElement.style.display = "none";
+    }
+
+    infoBox.classList.add("mostrar");
+  }, 150);
+}
+</script>
+
+</body>
+</html>

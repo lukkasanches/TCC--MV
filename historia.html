@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>História de Bauru - Tradição e Progresso</title>
+
+    <style>
+        :root {
+            --primary: #c59b27;
+            --primary-dark: #5c4512;
+            --header-bg: #8c6a1d;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #2b2b2b;
+            --text-light: #555555;
+            --border-radius: 12px;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        /* Botão de Voltar Fixo */
+        .botao-inicio {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: var(--primary-dark);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .botao-inicio:hover {
+            background: #42310b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+
+        /* Cabeçalho */
+        header {
+            background: linear-gradient(135deg, #775917 0%, var(--primary) 100%);
+            color: white;
+            text-align: center;
+            padding: 70px 20px 40px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        /* Menu de Navegação */
+        nav {
+            background-color: var(--primary-dark);
+            text-align: center;
+            padding: 14px;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        nav a {
+            color: #f4f4f4;
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #f3d884;
+        }
+
+        /* Conteúdo Principal */
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background-color: var(--card-bg);
+            padding: 35px;
+            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--primary);
+        }
+
+        h2 {
+            color: var(--primary-dark);
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-color);
+            font-size: 1.05rem;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Linha do Tempo Estilizada */
+        .timeline {
+            position: relative;
+            margin-top: 25px;
+            padding-left: 20px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .historia-card {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 20px;
+        }
+
+        .historia-card::before {
+            content: '';
+            position: absolute;
+            left: -28px;
+            top: 4px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .ano-tag {
+            display: inline-block;
+            font-weight: 700;
+            color: var(--primary-dark);
+            background-color: #fef8e7;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+            border: 1px solid #f3e5b8;
+        }
+
+        .historia-card h3 {
+            font-size: 1.15rem;
+            color: #111;
+            margin-bottom: 6px;
+        }
+
+        .historia-card p {
+            color: var(--text-light);
+            font-size: 0.98rem;
+        }
+
+        /* Destaques e Curiosidades */
+        .box-destaque {
+            background-color: #fdfbf3;
+            border-left: 4px solid var(--primary);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .box-destaque strong {
+            color: var(--primary-dark);
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--primary-dark);
+            color: #e5e5e5;
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 0.9rem;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            section { padding: 22px; }
+            nav a { display: inline-block; margin: 5px 10px; }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" class="botao-inicio">← Início</a>
+
+    <header>
+        <h1>História de Bauru</h1>
+        <p>A jornada da "Cidade Sem Limites": dos povos originários e trilhos férreos à capital acadêmica do centro paulista</p>
+    </header>
+
+    <nav>
+        <a href="#inicio">Sobre</a>
+        <a href="#origem">Origens</a>
+        <a href="#historia">Cronologia Detalhada</a>
+    </nav>
+
+    <main>
+
+        <!-- SOBRE BAURU -->
+        <section id="inicio">
+            <h2>Sobre Bauru</h2>
+            <p>
+                Localizada estrategicamente no centro-oeste do estado de São Paulo, <strong>Bauru</strong> é um dos mais influentes polos urbanos do interior paulista. Reconhecida historicamente como um crucial entroncamento rodoferroviário, a cidade se consolidou ao longo das décadas como referência regional em comércio, prestação de serviços, atendimento médico de alta complexidade e educação superior.
+            </p>
+            <p>
+                O apelido carinhoso de <em>"Cidade Sem Limites"</em> reflete não apenas o seu contínuo crescimento geográfico, mas também o espírito progressista de sua população, recebendo migrantes e imigrantes de diversas partes do Brasil e do mundo que ajudaram a moldar sua identidade cultural única.
+            </p>
+        </section>
+
+        <!-- ORIGEM E POVOAMENTO -->
+        <section id="origem">
+            <h2>Origem e Primeiro Povoamento</h2>
+            <p>
+                Antes da chegada dos pioneiros e bandeirantes no século XIX, o território bauruense era habitado pelos índios <strong>Kaingangs</strong> (historicamente chamados de Coroados). O nome "Bauru" possui origem indígena, derivando de termos do Tupi-Guarani relacionados à vegetação e às quedas d'água locais, como a abundância de bambus e rios na bacia do Tietê e Paranapanema.
+            </p>
+            
+            <div class="box-destaque">
+                <strong>O Ciclo do Café e da Terra Roxa:</strong> A partir da metade do século XIX, famílias vindas do leste paulista e do sul de Minas Gerais avançaram rumo ao oeste em busca de terras férteis para o cultivo do café, fundando os primeiros ranchos e fazendas que deram origem ao arraial.
+            </div>
+
+            <p>
+                Em <strong>1º de agosto de 1896</strong>, devido ao acelerado crescimento populacional e econômico promovido pelas atividades agrícolas e comerciais, o povoado foi oficialmente desmembrado do município de Agudos e elevado à categoria de município autônomo.
+            </p>
+        </section>
+
+        <!-- CRONOLOGIA E MARCOS HISTÓRICOS -->
+        <section id="historia">
+            <h2>Cronologia e Principais Momentos</h2>
+
+            <div class="timeline">
+
+                <div class="historia-card">
+                    <span class="ano-tag">Século XIX</span>
+                    <h3>Povoamento e Fundação do Arraial</h3>
+                    <p>
+                        Avanço das expedições de povoamento não indígena na região centro-oeste paulista, estabelecimento das primeiras fazendas cafeeiras e organização do primeiro núcleo urbano em torno da capela do Divino Espírito Santo.
+                    </p>
+                </div>
+
+                <div class="historia-card">
+                    <span class="ano-tag">1896</span>
+                    <h3>Emancipação Política</h3>
+                    <p>
+                        Em 1º de agosto, Bauru conquista sua emancipação política e administrativa, elegendo sua primeira Câmara Municipal e organizando os serviços públicos do novo município.
+                    </p>
+                </div>
+
+                <div class="historia-card">
+                    <span class="ano-tag">Início do Século XX</span>
+                    <h3>A Era Ouro das Ferrovias</h3>
+                    <p>
+                        Bauru transforma-se em um dos maiores entroncamentos ferroviários da América Latina com o cruzamento de três grandes companhias: a <strong>Companhia Paulista</strong>, a <strong>Estrada de Ferro Sorocabana</strong> e a lendária <strong>Estrada de Ferro Noroeste do Brasil (NOB)</strong>. A cidade torna-se a porta de entrada para o Mato Grosso e Bolívia.
+                    </p>
+                </div>
+
+                <div class="historia-card">
+                    <span class="ano-tag">1937</span>
+                    <h3>Criação do Sanduíche Bauru</h3>
+                    <p>
+                        O estudante bauruense Casimiro Pinto Neto cria no restaurante Ponto Chic, em São Paulo, o icônico <strong>Sanduíche Bauru</strong> (pão francês, picles, tomate, rosbife e queijos derretidos em banho-maria). O lanche tornou-se patrimônio imaterial cultural e símbolo máximo de orgulho do município.
+                    </p>
+                </div>
+
+                <div class="historia-card">
+                    <span class="ano-tag">Metade do Século XX</span>
+                    <h3>Urbanização e Transição Econômica</h3>
+                    <p>
+                        Com o gradual declínio do transporte por trilhos, a cidade adapta-se com maestria construindo uma forte malha rodoviária (como a Rodovia Marechal Rondon), atraindo indústrias, atacados comerciais e expandindo a infraestrutura urbana do centro e bairros.
+                    </p>
+                </div>
+
+                <div class="historia-card">
+                    <span class="ano-tag">Décadas de 1960 - 1980</span>
+                    <h3>Consolidação como Polo Universitário e de Saúde</h3>
+                    <p>
+                        Instalação do campus da <strong>Universidade de São Paulo (USP Bauru)</strong>, com os renomados cursos de Odontologia e Fonoaudiologia e o Hospital de Reabilitação de Anomalias Craniofaciais (Centrinho). O surgimento da UNESP e de universidades privadas fixa Bauru como referência na educação superior brasileira.
+                    </p>
+                </div>
+
+                <div class="historia-card">
+                    <span class="ano-tag">Atualidade</span>
+                    <h3>Metrópole Regional e Cidade do Futuro</h3>
+                    <p>
+                        Bauru afirma-se como um centro urbano dinâmico de quase 400 mil habitantes, integrando tecnologia, inovação, preservação da memória histórica ferroviária e excelente qualidade de vida no coração do Estado de São Paulo.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; Projeto Educacional e Histórico — Memória da Cidade de Bauru</p>
+    </footer>
+
+</body>
+</html>
